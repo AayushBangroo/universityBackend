@@ -57,8 +57,10 @@ create table book_details(
 	book_detail_id bigint not null auto_increment,
     issue_date date,
     book_id bigint,
+    student_id bigint,
     primary key(book_detail_id),
-    FOREIGN KEY (book_id) REFERENCES book(book_id)
+    FOREIGN KEY (book_id) REFERENCES book(book_id),
+    FOREIGN KEY (student_id) REFERENCES student(student_id) on delete cascade
 );
 
 set foreign_key_checks=1;

@@ -78,18 +78,20 @@ public class BookServiceImpl implements BookService {
             throw new RuntimeException("Book with id - " + book.getBookId() + " and title " +
                     book.getTitle() + " is already issued to someone.");
         }
+
+        Student student = studentRepository.findById(studentDTO.getStudentId());
         //set book details
         BookDetails bookDetails = new BookDetails();
         bookDetails.setBook(book);
         bookDetails.setIssueDate(new Date());
+        bookDetails.setStudent(student);
 
         //assign book to the student
-        Student student = studentRepository.findById(studentDTO.getStudentId());
         book.setStudent(student);
 
         bookDetailsRepository.save(bookDetails);
     }
-
+    
     @Override
     @Transactional
     public List<BookDTO> findAvailableBooks() {

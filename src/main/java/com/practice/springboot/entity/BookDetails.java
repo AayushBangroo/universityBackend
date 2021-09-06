@@ -16,10 +16,14 @@ import java.util.Date;
 public class BookDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="book_detail_id")
+    @Column(name = "book_detail_id")
     private Long bookDetailId;
 
-    @Column(name="issue_date")
+    @ManyToOne
+    @JoinColumn(name = "student_id", referencedColumnName = "student_id")
+    private Student student;
+
+    @Column(name = "issue_date")
     private Date issueDate;
 
     @OneToOne(cascade = CascadeType.ALL)
