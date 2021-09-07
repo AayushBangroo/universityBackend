@@ -32,6 +32,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public StudentDTO findById(Long id) {
+
+        Student student = studentRepository.findById(id);
+
+        if (student == null) return null;
+
         return new StudentDTO(studentRepository.findById(id));
     }
 

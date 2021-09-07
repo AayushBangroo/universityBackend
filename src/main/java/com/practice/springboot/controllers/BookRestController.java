@@ -75,7 +75,7 @@ public class BookRestController {
     @GetMapping("/details/{bookId}")
     public BookDetailsDTO getBookDetails(@PathVariable("bookId") Long id) {
         BookDTO bookDTO = bookService.findById(id);
-        BookDetailsDTO bookDetailsDTO = bookDetailsService.findById(id);
+        BookDetailsDTO bookDetailsDTO = bookDetailsService.findByBookId(id);
 
         if (bookDTO == null) {
             throw new RuntimeException("No such book exists id - " + id);
@@ -84,8 +84,7 @@ public class BookRestController {
             throw new RuntimeException("Book is not allocated to any student - " + id);
         }
 
-        BookDetailsDTO bookDetails = bookDetailsService.findByBookId(id);
-        return bookDetails;
+        return bookDetailsDTO;
     }
 
     @GetMapping("issued/{studentId}")

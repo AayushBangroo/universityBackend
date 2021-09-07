@@ -91,7 +91,7 @@ public class BookServiceImpl implements BookService {
 
         bookDetailsRepository.save(bookDetails);
     }
-    
+
     @Override
     @Transactional
     public List<BookDTO> findAvailableBooks() {

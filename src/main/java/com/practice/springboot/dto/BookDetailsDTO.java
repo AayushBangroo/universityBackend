@@ -28,6 +28,6 @@ public class BookDetailsDTO {
         this.setBookDetailsId(b.getBookDetailId());
         this.setBookDTO(new BookDTO(b.getBook()));
         this.setIssueDate(b.getIssueDate());
-        this.setStudentDTO(new StudentDTO(b.getBook().getStudent()));
+        this.setStudentDTO(new StudentDTO(b.getStudent()));
     }
 }

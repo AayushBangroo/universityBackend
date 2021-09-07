@@ -27,12 +27,14 @@ public class StudentDTO {
 
 
     public StudentDTO(Student student) {
+
         this.studentId = student.getStudentId();
         this.firstName = student.getFirstName();
         this.lastName = student.getLastName();
         this.emailId = student.getEmailId();
         if (student.getGuardian() != null)
             this.guardianDTO = new GuardianDTO(student.getGuardian());
+
     }
 
     public Student toEntity() {
