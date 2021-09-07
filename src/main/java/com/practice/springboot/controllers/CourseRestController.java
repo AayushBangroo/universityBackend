@@ -1,6 +1,7 @@
 package com.practice.springboot.controllers;
 
-import com.practice.springboot.entity.Course;
+import com.practice.springboot.dto.CourseDTO;
+import com.practice.springboot.dto.CourseMaterialDTO;
 import com.practice.springboot.entity.CourseMaterial;
 import com.practice.springboot.service.course.CourseService;
 import com.practice.springboot.service.courseMaterial.CourseMaterialService;
@@ -20,22 +21,22 @@ public class CourseRestController {
     CourseMaterialService courseMaterialService;
 
     @GetMapping("/course/all")
-    public List<Course> getAllCourses(){
+    public List<CourseDTO> getAllCourses() {
         return courseService.findAll();
     }
 
     @GetMapping("/courseMaterial/all")
-    public List<CourseMaterial> getAllCourseMaterials(){
+    public List<CourseMaterialDTO> getAllCourseMaterials() {
         return courseMaterialService.findAll();
     }
 
     @PostMapping("/course")
-    public void saveCourse(@RequestBody Course course){
+    public void saveCourse(@RequestBody CourseDTO course) {
         courseService.saveCourse(course);
     }
 
-    @PostMapping("/courseMaterial")
-    public void saveCourseMaterial(@RequestBody CourseMaterial courseMaterial){
-        courseMaterialService.saveCourseMaterial(courseMaterial);
+    @PostMapping("/courseMaterial/{courseId}")
+    public void saveCourseMaterial(@RequestBody CourseMaterialDTO courseMaterial, @PathVariable Long courseId) {
+        courseMaterialService.saveCourseMaterialForCourse(courseMaterial, courseId);
     }
 }

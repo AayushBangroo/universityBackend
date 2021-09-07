@@ -1,13 +1,14 @@
 package com.practice.springboot.service.course;
 
+import com.practice.springboot.dto.CourseDTO;
 import com.practice.springboot.entity.Course;
 
 import java.util.List;
 
 public interface CourseService {
-    public List<Course> findAll();
+    public List<CourseDTO> findAll();
 
-    public Course findById(Long id);
+    public CourseDTO findById(Long id);
 
-    public void saveCourse(Course course);
+    public void saveCourse(CourseDTO course);
 }
