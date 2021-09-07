@@ -13,18 +13,23 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="course_material")
+@Table(name = "course_material")
 public class CourseMaterial {
     @Id
-    @Column(name="course_material_id")
+    @Column(name = "course_material_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long courseMaterialId;
 
-    @Column(name="url")
+    @Column(name = "url")
     private String url;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnoreProperties("courseMaterial")
-    @JoinColumn(name="course_id", referencedColumnName = "course_id", nullable = false)
+    @JoinColumn(name = "course_id")
     private Course course;
+
+    public CourseMaterial(CourseMaterial courseMaterial, Course course) {
+       this.url = courseMaterial.getUrl();
+       this.course = course;
+    }
 }
