@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -37,4 +38,14 @@ public class Student {
     @OneToMany(mappedBy = "student")
     @JsonIgnoreProperties("student")
     List<Book> issuedBooks;
+
+    @ManyToMany(mappedBy = "studentList")
+    List<Course> courseList;
+
+    public void addCourse(Course course) {
+        if (courseList == null) {
+            courseList = new ArrayList<>();
+        }
+        courseList.add(course);
+    }
 }

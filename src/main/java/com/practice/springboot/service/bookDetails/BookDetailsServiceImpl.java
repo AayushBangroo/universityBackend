@@ -36,6 +36,7 @@ public class BookDetailsServiceImpl implements BookDetailsService {
     }
 
     @Override
+    @Transactional
     public BookDetailsDTO findByBookId(Long id) {
 
         BookDetails bookDetails;

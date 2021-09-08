@@ -39,4 +39,13 @@ public class CourseRestController {
     public void saveCourseMaterial(@RequestBody CourseMaterialDTO courseMaterial, @PathVariable Long courseId) {
         courseMaterialService.saveCourseMaterialForCourse(courseMaterial, courseId);
     }
+
+    @PostMapping("/course/enroll/{studentId}/{courseId}")
+    public String enrollStudentInCourse(@PathVariable("studentId") Long studentId,
+                                        @PathVariable("courseId") Long courseId) {
+
+        courseService.enrollStudentInCourse(studentId, courseId);
+
+        return "Student with id - " + studentId + " is enrolled in course id - " + courseId;
+    }
 }

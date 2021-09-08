@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,7 +27,23 @@ public class Course {
     @Column(name = "credit")
     private Integer credit;
 
-    @OneToOne(mappedBy = "course",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("course")
     private CourseMaterial courseMaterial;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "student_course_map",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    @JsonIgnoreProperties("courseList")
+    List<Student> studentList;
+
+    public void addStudent(Student student) {
+        if (studentList == null) {
+            studentList = new ArrayList<>();
+        }
+        studentList.add(student);
+    }
 }

@@ -1,14 +1,14 @@
 package com.practice.springboot.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.practice.springboot.entity.Book;
-import com.practice.springboot.entity.Guardian;
+import com.practice.springboot.entity.Course;
 import com.practice.springboot.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -25,6 +25,7 @@ public class StudentDTO {
     @JsonProperty("guardian")
     private GuardianDTO guardianDTO;
 
+    private List<CourseDTO> courseList;
 
     public StudentDTO(Student student) {
 
@@ -32,6 +33,10 @@ public class StudentDTO {
         this.firstName = student.getFirstName();
         this.lastName = student.getLastName();
         this.emailId = student.getEmailId();
+
+        if (student.getCourseList() != null)
+            this.courseList = student.getCourseList().stream()
+                    .map(CourseDTO::new).collect(Collectors.toList());
         if (student.getGuardian() != null)
             this.guardianDTO = new GuardianDTO(student.getGuardian());
 

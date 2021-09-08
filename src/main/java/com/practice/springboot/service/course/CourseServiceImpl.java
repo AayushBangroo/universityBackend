@@ -2,7 +2,9 @@ package com.practice.springboot.service.course;
 
 import com.practice.springboot.dto.CourseDTO;
 import com.practice.springboot.entity.Course;
+import com.practice.springboot.entity.Student;
 import com.practice.springboot.repository.CourseRepository;
+import com.practice.springboot.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     CourseRepository courseRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
 
     @Override
     @Transactional
@@ -43,5 +48,20 @@ public class CourseServiceImpl implements CourseService {
             course.getCourseMaterial().setCourse(course);
         }
         courseRepository.save(course);
+    }
+
+    @Override
+    @Transactional
+    public void enrollStudentInCourse(Long studentId, Long courseId) {
+        //get student
+        Student student = studentRepository.findById(studentId);
+        //get course
+        Course course = courseRepository.findById(courseId);
+
+        //enroll student
+        student.addCourse(course);
+        course.addStudent(student);
+
+        studentRepository.save(student);
     }
 }

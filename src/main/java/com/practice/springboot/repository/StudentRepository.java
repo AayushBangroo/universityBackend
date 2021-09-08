@@ -1,6 +1,7 @@
 package com.practice.springboot.repository;
 
 import com.practice.springboot.dao.StudentDAO;
+import com.practice.springboot.entity.Course;
 import com.practice.springboot.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.query.Query;

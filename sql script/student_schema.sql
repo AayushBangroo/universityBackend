@@ -63,4 +63,11 @@ create table book_details(
     FOREIGN KEY (student_id) REFERENCES student(student_id) on delete cascade
 );
 
+create table student_course_map(
+	student_id bigint not null,
+    course_id bigint not null,
+    FOREIGN KEY (course_id) REFERENCES course(course_id),
+    FOREIGN KEY (student_id) REFERENCES student(student_id)
+);
+
 set foreign_key_checks=1;
