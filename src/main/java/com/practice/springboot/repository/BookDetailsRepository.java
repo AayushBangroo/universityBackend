@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Repository
@@ -61,7 +62,7 @@ public class BookDetailsRepository implements BookDetailsDAO {
     }
 
     @Override
-    public BookDetails findByBookId(Long id) {
+    public BookDetails findByBookId(Long id) throws NoResultException {
         Session session = entityManager.unwrap(Session.class);
 
         Query<BookDetails> query = session.createQuery("from BookDetails where book_id=" + id, BookDetails.class);

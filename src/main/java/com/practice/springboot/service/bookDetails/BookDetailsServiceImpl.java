@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +37,16 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 
     @Override
     public BookDetailsDTO findByBookId(Long id) {
-        return new BookDetailsDTO(bookDetailsRepository.findByBookId(id));
+
+        BookDetails bookDetails;
+        try {
+            bookDetails = bookDetailsRepository.findByBookId(id);
+        } catch (NoResultException e) {
+            bookDetails = null;
+        }
+
+        if (bookDetails == null) return null;
+        return new BookDetailsDTO(bookDetails);
     }
 
     @Override
