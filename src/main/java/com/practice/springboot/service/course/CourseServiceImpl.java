@@ -58,6 +58,10 @@ public class CourseServiceImpl implements CourseService {
         //get course
         Course course = courseRepository.findById(courseId);
 
+        if (student == null)
+            throw new RuntimeException("No student with id " + studentId + " exists");
+        if (course == null)
+            throw new RuntimeException("No course with id " + courseId + " exists");
         //enroll student
         student.addCourse(course);
         course.addStudent(student);

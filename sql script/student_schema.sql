@@ -24,7 +24,7 @@ create table student(
 );
 
 create table teacher(
-	teacher_id bigint primary key,
+	teacher_id bigint primary key auto_increment,
     first_name varchar(30),
     last_name varchar(30)
 );
