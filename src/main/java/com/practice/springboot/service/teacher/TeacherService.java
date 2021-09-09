@@ -10,6 +10,8 @@ public interface TeacherService {
 
     Teacher findById(Long id);
 
+    void assignCourse(Long teacherId, Long courseId);
+
     void deleteTeacherById(Long id);
 
     void saveTeacher(Teacher teacher);

@@ -1,13 +1,15 @@
 package com.practice.springboot.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "teacher")
@@ -23,4 +25,20 @@ public class Teacher {
 
     @Column(name = "last_name")
     private String lastName;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+    @JsonIgnoreProperties({"teacher", "courseMaterial", "studentList"})
+    List<Course> courseList;
+
+    public void addCourse(Course course) {
+        if (courseList == null) {
+            courseList = new ArrayList<>();
+        }
+        courseList.add(course);
+    }
+
+    @Override
+    public String  toString(){
+        return teacherId + " " + firstName + " " + lastName;
+    }
 }

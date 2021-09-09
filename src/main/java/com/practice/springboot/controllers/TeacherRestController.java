@@ -29,6 +29,12 @@ public class TeacherRestController {
         teacherService.saveTeacher(teacher);
     }
 
+    @PostMapping("/{teacherId}/{courseId}")
+    public void assignCourseToTeacher(@PathVariable("teacherId") Long teacherId,
+                                         @PathVariable("courseId") Long courseId) {
+        teacherService.assignCourse(teacherId,courseId);
+    }
+
     @DeleteMapping("/{teacherId}")
     public String deleteTeacherById(@PathVariable Long teacherId) {
         teacherService.deleteTeacherById(teacherId);

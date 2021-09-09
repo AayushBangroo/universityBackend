@@ -1,6 +1,8 @@
 package com.practice.springboot.service.teacher;
 
+import com.practice.springboot.entity.Course;
 import com.practice.springboot.entity.Teacher;
+import com.practice.springboot.repository.CourseRepository;
 import com.practice.springboot.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ public class TeacherServiceImpl implements TeacherService {
     @Autowired
     TeacherRepository teacherRepository;
 
+    @Autowired
+    CourseRepository courseRepository;
+
     @Override
     @Transactional
     public List<Teacher> findAll() {
@@ -24,6 +29,25 @@ public class TeacherServiceImpl implements TeacherService {
     @Transactional
     public Teacher findById(Long id) {
         return teacherRepository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public void assignCourse(Long teacherId, Long courseId) {
+        Teacher teacher = teacherRepository.findById(teacherId);
+
+        Course course = courseRepository.findById(courseId);
+
+        if (teacher == null)
+            throw new RuntimeException("Teacher with id " + teacherId + " does not exist");
+        if (course == null)
+            throw new RuntimeException("Course with id " + courseId + " does not exist");
+
+        teacher.addCourse(course);
+        course.setTeacher(teacher);
+
+        teacherRepository.save(teacher);
+        courseRepository.save(course);
     }
 
     @Override
