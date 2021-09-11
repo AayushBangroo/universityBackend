@@ -29,7 +29,7 @@ public class Student {
     @Column(name = "email_id")
     private String emailId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "guardian_id")
     private Guardian guardian;
 

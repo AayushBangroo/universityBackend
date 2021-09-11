@@ -22,7 +22,6 @@ public class StudentServiceImpl implements StudentService {
     GuardianRespository guardianRespository;
 
     @Override
-    @Transactional
     public List<StudentDTO> findAll() {
 
         List<Student> studentList = studentRepository.findAll();
@@ -30,7 +29,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    @Transactional
     public StudentDTO findById(Long id) {
 
         Student student = studentRepository.findById(id);
@@ -56,5 +54,18 @@ public class StudentServiceImpl implements StudentService {
     @Transactional
     public void saveStudent(StudentDTO studentDTO) {
         studentRepository.save(studentDTO.toEntity());
+    }
+
+    @Override
+    public StudentDTO findByGuardianId(Long guardianId) {
+
+        Student student;
+        try {
+            student = studentRepository.findByGuardianId(guardianId);
+        } catch (Exception e) {
+            throw new RuntimeException("No such guardian with id - " + guardianId + " exists for a student");
+        }
+
+        return new StudentDTO(student);
     }
 }

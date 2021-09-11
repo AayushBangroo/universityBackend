@@ -20,7 +20,7 @@ create table student(
     email_id varchar(40),
     guardian_id bigint,
     primary key(student_id),
-    FOREIGN KEY (guardian_id) REFERENCES guardian(guardian_id)
+    FOREIGN KEY (guardian_id) REFERENCES guardian(guardian_id) on delete cascade
 );
 
 create table teacher(

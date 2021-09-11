@@ -1,6 +1,8 @@
 package com.practice.springboot.controllers;
 
 import com.practice.springboot.dto.StudentDTO;
+import com.practice.springboot.entity.Guardian;
+import com.practice.springboot.service.guardian.GuardianService;
 import com.practice.springboot.service.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ public class StudentRestController {
 
     @Autowired
     StudentService studentService;
+
+    @Autowired
+    GuardianService guardianService;
 
     @GetMapping("/all")
     public List<StudentDTO> getAllStudents() {
@@ -29,6 +34,11 @@ public class StudentRestController {
         }
 
         return studentDTO;
+    }
+
+    @GetMapping("/guardian/{guardianId}")
+    public StudentDTO getStudentByGuardianId(@PathVariable("guardianId") Long guardianId) {
+        return studentService.findByGuardianId(guardianId);
     }
 
     @PostMapping

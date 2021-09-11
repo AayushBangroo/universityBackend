@@ -6,11 +6,13 @@ import com.practice.springboot.entity.Student;
 import java.util.List;
 
 public interface StudentService {
-    public List<StudentDTO> findAll();
+    List<StudentDTO> findAll();
 
-    public StudentDTO findById(Long id);
+    StudentDTO findById(Long id);
 
-    public void deleteStudentById(Long id);
+    void deleteStudentById(Long id);
 
-    public void saveStudent(StudentDTO student);
+    void saveStudent(StudentDTO student);
+
+    StudentDTO findByGuardianId(Long guardianId);
 }

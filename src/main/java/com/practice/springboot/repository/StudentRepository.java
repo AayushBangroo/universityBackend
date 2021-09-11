@@ -1,6 +1,7 @@
 package com.practice.springboot.repository;
 
 import com.practice.springboot.dao.StudentDAO;
+import com.practice.springboot.dto.StudentDTO;
 import com.practice.springboot.entity.Course;
 import com.practice.springboot.entity.Student;
 import org.hibernate.Session;
@@ -52,5 +53,14 @@ public class StudentRepository implements StudentDAO {
     public void save(Student student) {
         Session session = entityManager.unwrap(Session.class);
         session.saveOrUpdate(student);
+    }
+
+    @Override
+    public Student findByGuardianId(Long guardianId) {
+        Session session = entityManager.unwrap(Session.class);
+
+        Query<Student> query = session.createQuery("from Student where guardian_id=" + guardianId);
+
+        return query.getSingleResult();
     }
 }
