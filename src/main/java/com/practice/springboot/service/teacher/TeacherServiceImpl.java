@@ -20,13 +20,11 @@ public class TeacherServiceImpl implements TeacherService {
     CourseRepository courseRepository;
 
     @Override
-    @Transactional
     public List<Teacher> findAll() {
         return teacherRepository.findAll();
     }
 
     @Override
-    @Transactional
     public Teacher findById(Long id) {
         return teacherRepository.findById(id);
     }

@@ -71,13 +71,6 @@ class StudentRepositoryTest {
     @Transactional
     void deleteByIdTest() {
 
-        Student student = Student.builder()
-                .studentId(1L)
-                .firstName("Aayush")
-                .lastName("bangroo")
-                .emailId("aayush@gmail.com")
-                .build();
-
         studentRepository.deleteById(1L);
         Student expected = studentRepository.findById(1L);
 

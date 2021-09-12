@@ -1,2 +1,0 @@
-INSERT into student_schema.teacher(teacher_id, first_name, last_name) values (1, 'Aayush', 'Bangroo');
-INSERT into student_schema.teacher(teacher_id, first_name, last_name) values (2, 'Aman', 'Sharma');
