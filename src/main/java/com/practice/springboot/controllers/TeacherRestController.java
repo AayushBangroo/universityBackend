@@ -1,5 +1,6 @@
 package com.practice.springboot.controllers;
 
+import com.practice.springboot.dto.TeacherDTO;
 import com.practice.springboot.entity.Teacher;
 import com.practice.springboot.service.teacher.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +16,17 @@ public class TeacherRestController {
     TeacherService teacherService;
 
     @GetMapping("/{teacherId}")
-    public Teacher getTeacherById(@PathVariable Long teacherId) {
+    public TeacherDTO getTeacherById(@PathVariable Long teacherId) {
         return teacherService.findById(teacherId);
     }
 
     @GetMapping("/all")
-    public List<Teacher> getAllTeachers() {
+    public List<TeacherDTO> getAllTeachers() {
         return teacherService.findAll();
     }
 
     @PostMapping
-    public void saveTeacher(@RequestBody Teacher teacher) {
+    public void saveTeacher(@RequestBody TeacherDTO teacher) {
         teacherService.saveTeacher(teacher);
     }
 

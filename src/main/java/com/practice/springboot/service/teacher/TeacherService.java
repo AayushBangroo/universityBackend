@@ -1,18 +1,18 @@
 package com.practice.springboot.service.teacher;
 
-import com.practice.springboot.entity.Teacher;
+import com.practice.springboot.dto.TeacherDTO;
 
 import java.util.List;
 
 public interface TeacherService {
 
-    List<Teacher> findAll();
+    List<TeacherDTO> findAll();
 
-    Teacher findById(Long id);
+    TeacherDTO findById(Long id);
 
     void assignCourse(Long teacherId, Long courseId);
 
     void deleteTeacherById(Long id);
 
-    void saveTeacher(Teacher teacher);
+    void saveTeacher(TeacherDTO teacher);
 }

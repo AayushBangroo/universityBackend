@@ -1,5 +1,6 @@
 package com.practice.springboot.service.teacher;
 
+import com.practice.springboot.dto.TeacherDTO;
 import com.practice.springboot.entity.Course;
 import com.practice.springboot.entity.Teacher;
 import com.practice.springboot.repository.CourseRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -25,13 +27,18 @@ public class TeacherServiceImpl implements TeacherService {
     CourseRepository courseRepository;
 
     @Override
-    public List<Teacher> findAll() {
-        return teacherRepository.findAll();
+    public List<TeacherDTO> findAll() {
+        return teacherRepository.findAll().stream().map(TeacherDTO::new).collect(Collectors.toList());
     }
 
     @Override
-    public Teacher findById(Long id) {
-        return teacherRepository.findById(id);
+    public TeacherDTO findById(Long id) {
+
+        Teacher teacher = teacherRepository.findById(id);
+
+        if (teacher == null) return null;
+
+        return new TeacherDTO(teacherRepository.findById(id));
     }
 
     @Override
@@ -61,7 +68,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     @Transactional
-    public void saveTeacher(Teacher teacher) {
-        teacherRepository.save(teacher);
+    public void saveTeacher(TeacherDTO teacher) {
+        teacherRepository.save(teacher.toEntity());
     }
 }
