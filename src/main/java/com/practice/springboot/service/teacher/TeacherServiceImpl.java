@@ -17,14 +17,13 @@ import java.util.stream.Collectors;
 public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
+    private final CourseRepository courseRepository;
 
     @Autowired
-    public TeacherServiceImpl(TeacherRepository teacherRepository) {
+    public TeacherServiceImpl(TeacherRepository teacherRepository, CourseRepository courseRepository) {
         this.teacherRepository = teacherRepository;
+        this.courseRepository = courseRepository;
     }
-
-    @Autowired
-    CourseRepository courseRepository;
 
     @Override
     public List<TeacherDTO> findAll() {
@@ -63,6 +62,11 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     @Transactional
     public void deleteTeacherById(Long id) {
+
+        Teacher teacher = teacherRepository.findById(id);
+
+        if (teacher == null)
+            throw new RuntimeException("No such teacher with id - " + id + " exists");
         teacherRepository.deleteById(id);
     }
 

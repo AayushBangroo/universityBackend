@@ -69,7 +69,7 @@ class StudentServiceImplTest {
 
         Student captured = studentArgumentCaptor.getValue();
 
-        assertThat(captured).isEqualTo(student.toEntity());
+        assertThat(captured).usingRecursiveComparison().isEqualTo(student.toEntity());
     }
 
     @Test
