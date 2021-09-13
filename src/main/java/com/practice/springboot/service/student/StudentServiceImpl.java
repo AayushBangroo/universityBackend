@@ -15,11 +15,15 @@ import java.util.stream.Collectors;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
-    StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     @Autowired
     GuardianRespository guardianRespository;
+
+    @Autowired
+    public StudentServiceImpl(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     @Override
     public List<StudentDTO> findAll() {
@@ -41,7 +45,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public void deleteStudentById(Long id) {
+        //check if student exists
+        Student student = studentRepository.findById(id);
 
+        if (student == null)
+            throw new RuntimeException("No such student with id - " + id + " exists");
         //get student's Guardian
         Guardian guardian = studentRepository.findById(id).getGuardian();
         studentRepository.deleteById(id);

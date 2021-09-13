@@ -2,12 +2,14 @@ package com.practice.springboot.dto;
 
 import com.practice.springboot.entity.Guardian;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class GuardianDTO {
 
     private String name;
