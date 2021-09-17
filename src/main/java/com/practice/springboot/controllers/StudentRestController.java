@@ -1,7 +1,6 @@
 package com.practice.springboot.controllers;
 
 import com.practice.springboot.dto.StudentDTO;
-import com.practice.springboot.entity.Guardian;
 import com.practice.springboot.service.guardian.GuardianService;
 import com.practice.springboot.service.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;

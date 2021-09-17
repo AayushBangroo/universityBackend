@@ -1,9 +1,8 @@
+set foreign_key_checks=0;
 DROP SCHEMA IF EXISTS student_schema;
 create schema student_schema;
 
 use student_schema;
-
-set foreign_key_checks=0;
 
 create table guardian(
 	guardian_id bigint not null auto_increment,

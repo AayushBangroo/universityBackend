@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class GuardianDTO {
 
+    private Long guardianId;
+
     private String name;
 
     private String email;
@@ -19,13 +21,15 @@ public class GuardianDTO {
     private String mobile;
 
     public GuardianDTO(Guardian guardian) {
+        this.guardianId = guardian.getGuardianId();
         this.name = guardian.getName();
         this.email = guardian.getEmail();
         this.mobile = guardian.getMobile();
     }
 
-    public Guardian toEntity(){
+    public Guardian toEntity() {
         Guardian guardian = new Guardian();
+        guardian.setGuardianId(this.guardianId);
         guardian.setEmail(this.getEmail());
         guardian.setMobile(this.getMobile());
         guardian.setName(this.getName());

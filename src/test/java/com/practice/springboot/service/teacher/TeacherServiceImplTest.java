@@ -21,9 +21,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest
-@AutoConfigureTestDatabase
 @ExtendWith(MockitoExtension.class)
 class TeacherServiceImplTest {
 
@@ -53,17 +52,34 @@ class TeacherServiceImplTest {
     }
 
     @Test
-    @Disabled
     void assignCourse() {
-        teacherService.assignCourse(1L,1L);
+        Teacher teacher = Teacher.builder()
+                .firstName("aayush")
+                .lastName("bangroo")
+                .build();
 
+        Course course = Course.builder()
+                .credit(3)
+                .title("DBMS")
+                .build();
+
+        when(teacherRepository.findById(1L)).thenReturn(teacher);
+        when(courseRepository.findById(1L)).thenReturn(course);
+
+        teacherService.assignCourse(1L, 1L);
+
+        //verify id
         verify(teacherRepository).findById(1L);
         verify(courseRepository).findById(1L);
+
+        //verify save method
+        verify(teacherRepository).save(teacher);
+        verify(courseRepository).save(course);
     }
 
     @Test
     void deleteTeacherByIdExceptionThrown() {
-        assertThatThrownBy(()->{
+        assertThatThrownBy(() -> {
             teacherService.deleteTeacherById(12L);
         }).isInstanceOf(RuntimeException.class).hasMessage("No such teacher with id - 12 exists");
     }
